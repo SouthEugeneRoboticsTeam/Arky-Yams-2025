@@ -14,6 +14,14 @@ object RobotConstants {
 
 }
 
+object DispenserConstants{
+    val moi = KilogramSquareMeters.of(0.0)
+
+    val gearing = MechanismGearing(
+        GearBox.fromReductionStages(2.0)
+    )
+}
+
 object ElevatorConstants{
     private val chainPitch = Inches.of(0.25)
     private const val TOOTH_COUNT = 22
@@ -44,6 +52,14 @@ object WristConstants{
     val hardMin = Degrees.of(0.0)
     val hardMax = Degrees.of(0.0)
 
+    val gearing = MechanismGearing(
+        GearBox.fromReductionStages(
+            3.0,
+            4.0,
+            40.0 / 15.0
+        )
+    )
+
     val elevatorToWrist = MechanismLigament2d("Connector", 434.892930783, 66.56)
 }
 
@@ -52,4 +68,6 @@ object ElectronicIDs{
     const val ELEVATOR_RIGHT_MOTOR_ID = 14
 
     const val WRIST_MOTOR_ID = 5
+
+    const val DISPENSER_MOTOR_ID = 17
 }

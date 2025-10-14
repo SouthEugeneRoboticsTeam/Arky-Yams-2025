@@ -16,7 +16,11 @@ import org.sert2521.offseason2025.ElectronicIDs
 import org.sert2521.offseason2025.ElevatorConstants
 import org.sert2521.offseason2025.RobotConstants
 import org.sert2521.offseason2025.WristConstants
+import yams.gearing.GearBox
+import yams.gearing.MechanismGearing
 import yams.math.ExponentialProfilePIDController
+import yams.mechanisms.SmartMechanism
+import yams.mechanisms.SmartMechanism.*
 import yams.mechanisms.config.ElevatorConfig
 import yams.mechanisms.config.MechanismPositionConfig
 import yams.mechanisms.positional.Elevator
@@ -45,7 +49,11 @@ object ElevatorSubsystem : SubsystemBase() {
             )
         )
         .withSoftLimit(Meters.of(0.0), Meters.of(0.67))
-        .withGearing(ElevatorConstants.gearing)
+        .withGearing(
+            MechanismGearing(
+                GearBox.fromReductionStages(3.0, 4.0)
+            )
+        )
         .withIdleMode(SmartMotorControllerConfig.MotorMode.BRAKE)
         .withTelemetry("Elevator Motor (Left)", SmartMotorControllerConfig.TelemetryVerbosity.HIGH)
         .withStatorCurrentLimit(Amps.of(40.0))
