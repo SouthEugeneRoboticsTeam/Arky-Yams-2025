@@ -26,3 +26,8 @@ object ElevatorConstants{
     const val G = 0.0
     const val V = 0.0
 }
+
+object ElectronicIDs{
+    const val ELEVATOR_LEFT_MOTOR_ID = 13
+    const val ELEVATOR_RIGHT_MOTOR_ID = 14
+}

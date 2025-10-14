@@ -12,6 +12,7 @@ import edu.wpi.first.units.measure.Distance
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import org.sert2521.offseason2025.ElectronicIDs
 import org.sert2521.offseason2025.ElevatorConstants
 import yams.math.ExponentialProfilePIDController
 import yams.mechanisms.config.ElevatorConfig
@@ -22,8 +23,8 @@ import yams.motorcontrollers.local.SparkWrapper
 
 
 object ElevatorSubsystem : SubsystemBase() {
-    private val leftElevatorMotor = SparkMax(0, SparkLowLevel.MotorType.kBrushless)
-    private val rightElevatorMotor = SparkMax(0, SparkLowLevel.MotorType.kBrushless)
+    private val leftElevatorMotor = SparkMax(ElectronicIDs.ELEVATOR_LEFT_MOTOR_ID, SparkLowLevel.MotorType.kBrushless)
+    private val rightElevatorMotor = SparkMax(ElectronicIDs.ELEVATOR_RIGHT_MOTOR_ID, SparkLowLevel.MotorType.kBrushless)
 
     private val leftMotorConfig = SmartMotorControllerConfig(this)
         .withMechanismCircumference(ElevatorConstants.circumference)
@@ -44,7 +45,7 @@ object ElevatorSubsystem : SubsystemBase() {
         .withSoftLimit(Meters.of(0.0), Meters.of(0.67))
         .withGearing(ElevatorConstants.gearing)
         .withIdleMode(SmartMotorControllerConfig.MotorMode.BRAKE)
-        .withTelemetry("ElevatorMotorLeft", SmartMotorControllerConfig.TelemetryVerbosity.HIGH)
+        .withTelemetry("Elevator Motor (Left)", SmartMotorControllerConfig.TelemetryVerbosity.HIGH)
         .withStatorCurrentLimit(Amps.of(40.0))
         .withMotorInverted(false)
         .withFeedforward(
