@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.sert2521.offseason2025.ElectronicIDs
 import org.sert2521.offseason2025.ElevatorConstants
+import org.sert2521.offseason2025.RobotConstants
+import org.sert2521.offseason2025.WristConstants
 import yams.math.ExponentialProfilePIDController
 import yams.mechanisms.config.ElevatorConfig
 import yams.mechanisms.config.MechanismPositionConfig
@@ -61,8 +63,8 @@ object ElevatorSubsystem : SubsystemBase() {
     private val fullMotors = SparkWrapper(leftElevatorMotor, DCMotor.getNEO(2), leftMotorConfig)
 
     private val elevatorPosition = MechanismPositionConfig()
-        .withMaxRobotHeight(Meters.of(1.5))
-        .withMaxRobotLength(Meters.of(0.75))
+        .withMaxRobotHeight(RobotConstants.maxHeight)
+        .withMaxRobotLength(RobotConstants.maxLength)
         .withRelativePosition(Translation3d(Meters.of(-0.25), Meters.of(0.0), Meters.of(0.5)))
 
     private val elevatorConfig = ElevatorConfig(fullMotors)
@@ -73,6 +75,12 @@ object ElevatorSubsystem : SubsystemBase() {
         .withMass(ElevatorConstants.weight)
 
     private val elevator = Elevator(elevatorConfig)
+
+    init {
+        elevator.mechanismLigament.append(
+            WristConstants.elevatorToWrist.append(WristSubsystem.getMechanism2dForElevator())
+        )
+    }
 
     override fun periodic() {
         elevator.updateTelemetry()
