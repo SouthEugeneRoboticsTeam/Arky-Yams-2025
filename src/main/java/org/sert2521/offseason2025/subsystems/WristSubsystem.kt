@@ -58,8 +58,11 @@ object WristSubsystem : SubsystemBase() {
         .withMOI(WristConstants.moi.`in`(KilogramSquareMeters))
         .withHardLimit(WristConstants.hardMin, WristConstants.hardMax)
         .withTelemetry("Wrist", SmartMotorControllerConfig.TelemetryVerbosity.HIGH)
+        .withLength(WristConstants.length)
+        .withStartingPosition(Rotations.of(-0.27))
 
     private val arm = Arm(fullConfig)
+
 
 
     override fun periodic() {

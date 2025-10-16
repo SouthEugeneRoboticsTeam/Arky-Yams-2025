@@ -17,6 +17,10 @@ object Input {
 
 
     init {
-        maniStow.onTrue(ElevatorSubsystem.setHeight(Meters.of(0.0)))
+        maniStow.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.stow.elevatorGoal))
+        maniL1.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l1.elevatorGoal))
+        maniL2.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l2.elevatorGoal))
+        maniL3.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l3.elevatorGoal))
+        maniL4.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l4.elevatorGoal))
     }
 }

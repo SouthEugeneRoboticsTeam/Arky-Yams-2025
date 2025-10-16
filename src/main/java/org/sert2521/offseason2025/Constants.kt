@@ -2,10 +2,26 @@ package org.sert2521.offseason2025
 
 import edu.wpi.first.math.system.plant.DCMotor
 import edu.wpi.first.units.Units.*
+import edu.wpi.first.units.measure.Distance
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d
+import org.sert2521.offseason2025.utils.ManipulatorGoalState
 import yams.gearing.GearBox
 import yams.gearing.MechanismGearing
 import kotlin.math.PI
+
+object ManipulatorSetpoints {
+
+
+
+    val intake = ManipulatorGoalState(Meters.of(0.015), Rotations.of(-0.27))
+    val l1 = ManipulatorGoalState(Meters.of(0.015), Rotations.of(-0.182))
+    val l2 = ManipulatorGoalState(Meters.of(0.08), Rotations.of(0.22))
+    val l3 = ManipulatorGoalState(Meters.of(0.28), Rotations.of(0.22))
+    val l4 = ManipulatorGoalState(Meters.of(0.67 - 0.01), Rotations.of(0.124))
+
+    val l4Out = ManipulatorGoalState(Meters.of(0.015), Rotations.of(0.254))
+    val stow = ManipulatorGoalState(Meters.of(0.015), Rotations.of(0.21))
+}
 
 object RobotConstants {
     val maxHeight = Inches.of(84.0)
@@ -49,8 +65,10 @@ object WristConstants{
 
     val moi = KilogramSquareMeters.of(0.0)
 
-    val hardMin = Degrees.of(0.0)
-    val hardMax = Degrees.of(0.0)
+    val length = Inches.of(10.8)
+
+    val hardMin = Rotations.of(-0.27)
+    val hardMax = Rotations.of(0.254)
 
     val gearing = MechanismGearing(
         GearBox.fromReductionStages(
