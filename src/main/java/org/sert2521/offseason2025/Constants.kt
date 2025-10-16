@@ -31,11 +31,22 @@ object RobotConstants {
 }
 
 object DispenserConstants{
-    val moi = KilogramSquareMeters.of(0.0)
+    val dispenserMoi = KilogramSquareMeters.of(0.0)
 
-    val gearing = MechanismGearing(
+    val dispenserGearing = MechanismGearing(
         GearBox.fromReductionStages(2.0)
     )
+
+    const val INTAKE_SPEED_FIRST = 0.2
+    const val INTAKE_SPEED_SECOND = -0.1
+    const val INTAKE_SPEED_THIRD = 0.06
+
+    const val OUTTAKE_NORMAL_SPEED = 0.3
+    const val OUTTAKE_L4_SPEED = -0.2
+    const val OUTTAKE_TIME = 1.0
+
+    const val DISPENSER_P = 0.0
+    const val DISPENSER_D = 0.0
 }
 
 object ElevatorConstants{
@@ -88,4 +99,7 @@ object ElectronicIDs{
     const val WRIST_MOTOR_ID = 5
 
     const val DISPENSER_MOTOR_ID = 17
+
+    const val DISPENSER_BEAMBREAK_ID = 8
+    const val RAMP_BEAMBREAK_ID = 9
 }

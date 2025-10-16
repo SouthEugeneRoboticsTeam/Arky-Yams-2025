@@ -3,7 +3,6 @@ package org.sert2521.offseason2025.subsystems
 import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
 import edu.wpi.first.math.MathUtil
-import edu.wpi.first.math.geometry.Translation3d
 import edu.wpi.first.math.system.plant.DCMotor
 import edu.wpi.first.units.Units.*
 import edu.wpi.first.units.measure.Angle
@@ -77,12 +76,12 @@ object WristSubsystem : SubsystemBase() {
         return arm.mechanismLigament
     }
 
-    fun setAngle(angle: Angle): Command {
+    private fun setAngleInstantCommand(angle: Angle): Command {
         return arm.setAngle(angle)
     }
 
-    fun setAngleWaitUntilThere(angle: Angle): Command {
-        return setAngle(angle).andThen(
+    fun setAngleCommand(angle: Angle): Command {
+        return setAngleInstantCommand(angle).andThen(
             Commands.waitUntil {
                 MathUtil.isNear(angle.`in`(Rotations), arm.angle.`in`(Rotations), 0.05)
             }

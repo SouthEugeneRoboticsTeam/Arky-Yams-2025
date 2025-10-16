@@ -17,10 +17,10 @@ object Input {
 
 
     init {
-        maniStow.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.stow.elevatorGoal))
-        maniL1.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l1.elevatorGoal))
-        maniL2.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l2.elevatorGoal))
-        maniL3.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l3.elevatorGoal))
-        maniL4.onTrue(ElevatorSubsystem.setHeight(ManipulatorSetpoints.l4.elevatorGoal))
+        maniStow.onTrue(ElevatorSubsystem.setHeightSafeCommand(ManipulatorSetpoints.stow.elevatorGoal))
+        maniL1.onTrue(ElevatorSubsystem.setHeightSafeCommand(ManipulatorSetpoints.l1.elevatorGoal))
+        maniL2.onTrue(ElevatorSubsystem.setHeightSafeCommand(ManipulatorSetpoints.l2.elevatorGoal))
+        maniL3.onTrue(ElevatorSubsystem.setHeightSafeCommand(ManipulatorSetpoints.l3.elevatorGoal))
+        maniL4.onTrue(ElevatorSubsystem.setHeightSafeCommand(ManipulatorSetpoints.l4.elevatorGoal))
     }
 }

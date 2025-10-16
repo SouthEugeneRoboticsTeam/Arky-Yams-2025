@@ -19,8 +19,6 @@ import org.sert2521.offseason2025.WristConstants
 import yams.gearing.GearBox
 import yams.gearing.MechanismGearing
 import yams.math.ExponentialProfilePIDController
-import yams.mechanisms.SmartMechanism
-import yams.mechanisms.SmartMechanism.*
 import yams.mechanisms.config.ElevatorConfig
 import yams.mechanisms.config.MechanismPositionConfig
 import yams.mechanisms.positional.Elevator
@@ -98,20 +96,23 @@ object ElevatorSubsystem : SubsystemBase() {
         elevator.simIterate()
     }
 
-    fun setHeight(height: Distance): Command {
+    private fun setHeightInstantCommand(height: Distance): Command {
         return elevator.setHeight(height)
     }
 
-    fun setHeightUntilThere(height: Distance): Command {
-        return setHeight(height).andThen(
-            Commands.waitUntil {
-                MathUtil.isNear(
-                    height.`in`(Meters),
-                    elevator.height.`in`(Meters),
-                    0.05
+    fun setHeightSafeCommand(height: Distance):Command{
+        return Commands.waitUntil { !DispenserSubsystem.getBlocked() }
+            .andThen(
+                setHeightInstantCommand(height).andThen(
+                    Commands.waitUntil {
+                        MathUtil.isNear(
+                            height.`in`(Meters),
+                            elevator.height.`in`(Meters),
+                            0.05
+                        )
+                    }
                 )
-            }
-        )
+            )
     }
 
     fun sysId(): Command {
