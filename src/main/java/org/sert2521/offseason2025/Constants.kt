@@ -102,4 +102,14 @@ object ElectronicIDs{
 
     const val DISPENSER_BEAMBREAK_ID = 8
     const val RAMP_BEAMBREAK_ID = 9
+
+    const val RAMP_MOTOR_ID = 18
+}
+
+object RampConstants {
+    val rampMoi = KilogramSquareMeters.of(0.0)
+
+    val rampGearing = MechanismGearing(
+        GearBox.fromReductionStages(6.0)
+    )
 }
