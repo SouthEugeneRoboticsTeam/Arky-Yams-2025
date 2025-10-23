@@ -6,17 +6,14 @@ import edu.wpi.first.math.system.plant.DCMotor
 import edu.wpi.first.units.Units.Amps
 import edu.wpi.first.units.Units.KilogramSquareMeters
 import edu.wpi.first.wpilibj.DigitalInput
-import edu.wpi.first.wpilibj2.command.Command
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import org.littletonrobotics.junction.Logger
 import org.sert2521.offseason2025.DispenserConstants
 import org.sert2521.offseason2025.ElectronicIDs
 import org.sert2521.offseason2025.ElectronicIDs.DISPENSER_BEAMBREAK_ID
 import org.sert2521.offseason2025.ElectronicIDs.RAMP_BEAMBREAK_ID
-import org.sert2521.offseason2025.WristConstants
-import yams.gearing.GearBox
-import yams.gearing.MechanismGearing
 import yams.mechanisms.config.SensorConfig
-import yams.mechanisms.positional.Arm
 import yams.motorcontrollers.SmartMotorControllerConfig
 import yams.motorcontrollers.local.SparkWrapper
 
@@ -36,26 +33,27 @@ object DispenserSubsystem: SubsystemBase() {
     private val beambreakRamp = DigitalInput(RAMP_BEAMBREAK_ID)
     private val beambreakDispenser = DigitalInput(DISPENSER_BEAMBREAK_ID)
 
-    private val sensor = SensorConfig("Coral Beambreaks")
+    private val coralSensors = SensorConfig("Coral Beambreaks")
         .withField("Ramp Beambreak", beambreakRamp::get, false)
         .withField("Dispenser Beambreak", beambreakDispenser::get, false)
         .sensor
 
     override fun periodic() {
         fullMotor.updateTelemetry()
-        getBlocked()
     }
 
     override fun simulationPeriodic() {
         fullMotor.simIterate()
     }
 
+    /* Functions */
+
     fun getRampBlocked():Boolean{
-        return !sensor.getAsBoolean("Ramp Beambreak")
+        return !coralSensors.getAsBoolean("Ramp Beambreak")
     }
 
     fun getDispenserBlocked():Boolean{
-        return !sensor.getAsBoolean("Dispenser Beambreak")
+        return !coralSensors.getAsBoolean("Dispenser Beambreak")
     }
 
     fun getBlocked():Boolean{
@@ -65,6 +63,10 @@ object DispenserSubsystem: SubsystemBase() {
     fun setSpeed(speed : Double){
         fullMotor.dutyCycle = speed
     }
+
+    /* Commands */
+
+
 
 
 }

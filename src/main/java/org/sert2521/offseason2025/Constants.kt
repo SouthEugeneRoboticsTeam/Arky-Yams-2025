@@ -10,9 +10,6 @@ import yams.gearing.MechanismGearing
 import kotlin.math.PI
 
 object ManipulatorSetpoints {
-
-
-
     val intake = ManipulatorGoalState(Meters.of(0.015), Rotations.of(-0.27))
     val l1 = ManipulatorGoalState(Meters.of(0.015), Rotations.of(-0.182))
     val l2 = ManipulatorGoalState(Meters.of(0.08), Rotations.of(0.22))
@@ -26,8 +23,6 @@ object ManipulatorSetpoints {
 object RobotConstants {
     val maxHeight = Inches.of(84.0)
     val maxLength = Inches.of(21.4).plus(Inches.of(14.0))
-
-
 }
 
 object DispenserConstants{
@@ -112,4 +107,14 @@ object RampConstants {
     val rampGearing = MechanismGearing(
         GearBox.fromReductionStages(6.0)
     )
+}
+
+object ExampleConstants {
+    const val EXAMPLE_ID = 1
+
+    val exampleGearing = MechanismGearing(
+        GearBox.fromReductionStages(3.0, 4.0, 2.5, 0.2)
+    )
+
+    val moi = 0.2
 }

@@ -96,6 +96,14 @@ object ElevatorSubsystem : SubsystemBase() {
         elevator.simIterate()
     }
 
+    /* Functions */
+
+    fun getHeight():Distance{
+        return elevator.height
+    }
+
+    /* Commands */
+
     private fun setHeightInstantCommand(height: Distance): Command {
         return elevator.setHeight(height)
     }
